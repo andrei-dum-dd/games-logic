@@ -2,3 +2,24 @@
     margin: 0;
     padding: 0;
 }
+
+.board {
+    // background: #ddd;
+    min-height: 100px;
+    min-width: 100px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    .cell {
+        display: flex;
+        width: 100px;
+        height: 100px;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #ddd;
+        font-size: 64px;
+    }
+}
