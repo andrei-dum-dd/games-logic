@@ -1,0 +1,41 @@
+{
+    "name": "games-logic",
+    "title": "Tic-Tac-Toe",
+    "version": "1.0.0",
+    "description": "Games Logic",
+    "main": "index.js",
+    "scripts": {
+        "test": "jest --coverage",
+        "build": "webpack --mode production",
+        "dev": "webpack-dev-server --watch --mode development --progress --inline --hot"
+    },
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "author": "ncw",
+    "license": "ISC",
+    "bugs": {
+        "url": ""
+    },
+    "homepage": "",
+    "devDependencies": {
+        "@babel/core": "^7.8.0",
+        "@babel/preset-env": "^7.8.0",
+        "@babel/preset-typescript": "^7.8.0",
+        "babel-loader": "^8.0.6",
+        "css-loader": "^3.4.2",
+        "file-loader": "^5.0.2",
+        "html-webpack-plugin": "^3.2.0",
+        "jest": "^24.9.0",
+        "mini-css-extract-plugin": "^0.9.0",
+        "node-sass": "^4.13.0",
+        "sass-loader": "^8.0.1",
+        "style-loader": "^1.1.2",
+        "svg-inline-loader": "^0.8.0",
+        "typescript": "^3.7.4",
+        "webpack": "^4.41.5",
+        "webpack-cli": "^3.3.10",
+        "webpack-dev-server": "^3.10.1"
+    }
+}
