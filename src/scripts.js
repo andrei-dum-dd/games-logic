@@ -8,6 +8,7 @@ import { element, createElement } from './helpers/dom';
         turnUser: 0,
         turnAI: 0,
         turn: TURN.USER,
+        end: false,
 
         init: () => {
             game.createBoard();
@@ -41,7 +42,7 @@ import { element, createElement } from './helpers/dom';
             cellEvent: (cell) => {
                 cell.addEventListener('click', (event) => {
                     const clickedCell = event.currentTarget;
-                    if (clickedCell.classList.contains('checked')) return;
+                    if (clickedCell.classList.contains('checked') || game.end) return;
                     // mark as checked
                     clickedCell.classList.add('checked');
                     // extract pos
@@ -77,6 +78,8 @@ import { element, createElement } from './helpers/dom';
                     alert(message);
                 }, 333);
 
+                // set end game
+                game.end = true;
                 return;
             }
 
@@ -149,10 +152,10 @@ import { element, createElement } from './helpers/dom';
         // turn (player vs pc - random)
         AITurn: () => {
             const blockUser = Math.random() > 0.5;
-            // const blockUser = true;
+            // const blockUser = false;
 
             const hardAi = Math.random() > 0.5;
-            // const hardAi = true;
+            // const hardAi = false;
 
             const randomTurn = () => {
                 // free cells
