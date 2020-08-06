@@ -71,7 +71,12 @@ import { element, createElement } from './helpers/dom';
             //let
             if (game.determineWinLoose(cellId, mark)) {
                 // do alert or something on win
-                alert('win -> ' + mark);
+                const player = game.turn === TURN.AI ? TURN.AI : TURN.USER;
+                const message = 'Player ' + player.toUpperCase() + ' - "' + mark + '" WON !!!';
+                setTimeout(() => {
+                    alert(message);
+                }, 333);
+
                 return;
             }
 
@@ -138,27 +143,16 @@ import { element, createElement } from './helpers/dom';
                 });
             });
 
-            // no best moves
-            // if (nextMoves.length === 0) {
-            //     winPatterns.forEach((pattern) => {
-            //         markCells.forEach((cell) => {
-            //             const markedCellPos = parseInt(cell.getAttribute('cellpos'));
-            //             if (pattern.indexOf(markedCellPos) === -1 && nextMoves.indexOf(cell) === -1) nextMoves.push(cell);
-            //         });
-            //     });
-            // }
-
             return { other: otherMoves, next: nextMoves };
-            // return winPatterns;
         },
 
         // turn (player vs pc - random)
         AITurn: () => {
-            //const blockUser = Math.random() > 0.5;
-            const blockUser = true;
+            const blockUser = Math.random() > 0.5;
+            // const blockUser = true;
 
-            //const hardAi = Math.random() > 0.5;
-            const hardAi = true;
+            const hardAi = Math.random() > 0.5;
+            // const hardAi = true;
 
             const randomTurn = () => {
                 // free cells
@@ -203,6 +197,10 @@ import { element, createElement } from './helpers/dom';
                     return;
                 }
 
+                if (aiWinPatterns.other.length === 0) {
+                    randomTurn();
+                    return;
+                }
                 // click win patter random cell
                 console.log('AI -> Random WIN');
                 const randomWinCellPos = aiWinPatterns.other[Math.floor(Math.random() * aiWinPatterns.other.length)];
@@ -212,32 +210,6 @@ import { element, createElement } from './helpers/dom';
             };
 
             smartTurn();
-
-            // if (game.turnAI === 0) {
-            //     randomTurn();
-            //     return;
-            // }
-
-            return;
-            // free cells
-            const cells = element('.cell.checked.' + mark);
-            if (cells.length === 1) {
-                const pattern = winLose[cells[0].getAttribute('cellpos')];
-                const aiWinPatterns = [];
-                const status = pattern.forEach((pat) => {
-                    const win = pat.every((cellPos) => {
-                        const cell = element('.cell[cellPos="' + cellPos + '"]')[0];
-                        return cell.innerHTML === mark || cell.innerHTML === '';
-                    });
-
-                    if (win) aiWinPatterns.push(pat);
-                });
-                // get only one winning patters
-                const nextWinPattern = aiWinPatterns[Math.floor(Math.random() * aiWinPatterns.length)];
-                const availableCell = nextWinPattern.filter((cell) => element('[cellPos="' + cell + '"]'));
-                const nextRandomCellMove = availableCell[Math.floor(Math.random() * 2)];
-                element('[cellPos="' + nextRandomCellMove + '"]')[0].click();
-            }
         },
 
         // alert - winning
